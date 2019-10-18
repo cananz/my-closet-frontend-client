@@ -1,22 +1,76 @@
-.App {
+/**************************************
+STATIC LAYOUT CSS
+**************************************/
+
+#main.grid-container {
+  /* padding: 10px; */
+  width: 1000px;
+  margin: 0 auto;
+}
+
+#content.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  /* grid-auto-rows: 100px; */
+}
+
+header {
+	width: 960px;
+}
+
+nav, section {
+  float: left;
+}
+
+nav {
+  width: 200px;
+  margin-right: 10px;
+}
+
+section {
+  width: 750px;
+}
+
+
+
+/**************************************
+CSS 
+**************************************/
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #2980b9;
+  color: #FFF;
+  font-family: Helvetica;
   text-align: center;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
+.grid-card {
+  border: 1px solid rgba(255,255,255,0.8);
+  margin: 10px;
+  border-radius: 3px;
+  text-align: center;
+  padding-top: 8px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+header,
+nav,
+section {
+  border: 1px solid rgba(255,255,255,0.8);
+  margin-bottom: 10px;
+  border-radius: 3px;
 }
 
-.App-link {
-  color: #09d3ac;
+header {
+  padding: 20px 0;
+}
+
+nav, section {
+  padding: 200px 0;
 }
