@@ -34,7 +34,7 @@ section {
 
 
 /**************************************
-CSS 
+CSS
 **************************************/
 
 *, *:before, *:after {
@@ -44,8 +44,10 @@ CSS
 }
 
 body {
-  background: #2980b9;
-  color: #FFF;
+  /* background: #2980b9; */
+  background: mistyrose;
+  /* color: #FFF; */
+  color: cadetblue;
   font-family: Helvetica;
   text-align: center;
   margin: 0;
@@ -56,13 +58,17 @@ body {
   margin: 10px;
   border-radius: 3px;
   text-align: center;
-  padding-top: 8px;
+  padding-top: 3px;
+}
+
+.card-image {
+  max-width: 100px;
 }
 
 header,
 nav,
 section {
-  border: 1px solid rgba(255,255,255,0.8);
+  border: 3px solid rgba(255,255,255,0.8);
   margin-bottom: 10px;
   border-radius: 3px;
 }
@@ -71,6 +77,6 @@ header {
   padding: 20px 0;
 }
 
-nav, section {
+nav {
   padding: 200px 0;
 }
