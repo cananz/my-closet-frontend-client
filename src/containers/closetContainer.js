@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react'
 import ClothingCardsContainer from './clothingCardsContainer'
-import SideNav from './sideNav'
+import ClothingFilter from './sideNav'
 const userURL = 'http://localhost:3000/users/1'
 
 class ClothingContainer extends React.Component {
@@ -26,19 +26,22 @@ class ClothingContainer extends React.Component {
   }
 
   filterItems = (catName) => {
-    let filtered = this.state.allClothes.filter(item => item.category.name == catName)
+    let filtered = this.state.allClothes.filter(item => item.category.name === catName)
+
+    catName === 'all' ?
+    this.setState({filteredItems: this.state.allClothes})
+    :
     this.setState({filteredItems: filtered})
-    // console.log(this.props.items)
-    // console.log(catName)
   }
 
 
   render() {
     return (
-        <Container>
+      <Container>
 
-          <SideNav />
-            <ClothingCardsContainer
+          <ClothingFilter handleFilter={this.filterItems} />
+
+          <ClothingCardsContainer
                items={this.state.filteredItems} />
 
       </Container>

@@ -1,47 +1,54 @@
 import React from 'react';
-// import { Menu } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
-class SideNav extends React.Component {
+class ClothingFilter extends React.Component {
 
-  constructor() {
-    super()
-    this.state = { activeItem: '' }
+  constructor(props) {
+    super(props)
+    this.state = { activeTab: 'all' }
 
   }
 
-  // handleFilterClick = (e, { name }) => {
-  //   e.preventDefault()
-  //   this.setState({activeItem: name})
-  //   console.log(name)
-  //   debugger
-  //   // this.props.filterItems(name)
-  // }
+  handleFilterClick = (e, { name }) => {
+    e.preventDefault()
+    this.props.handleFilter(name)
+    this.setState({ activeTab: name })
+  }
 
   render() {
 
-    // const {activeItem} = this.state
+    const { activeTab } = this.state
 
     return (
-      <nav>
-        {/* <Menu>
-          <Menu.Item
-          name='all'
-          active={activeItem === 'all'}
-          onClick={this.handleFilterClick} />
+      <Menu tabular>
+      <Menu.Item
+        name='all'
+        active={activeTab === 'all'}
+        onClick={this.handleFilterClick} />
 
-          <Menu.Item
-          name='tops'
-          active={activeItem === 'tops'}
-          onClick={this.handleFilterClick} />
+      <Menu.Item
+        name='top'
+        active={activeTab === 'top'}
+        onClick={this.handleFilterClick} />
 
-          <Menu.Item
-          name='bottoms'
-          active={activeItem === 'bottoms'}
-          onClick={this.handleFilterClick} />
-        </Menu> */}
-      </nav>
+      <Menu.Item
+        name='bottom'
+        active={activeTab === 'bottom'}
+        onClick={this.handleFilterClick} />
+
+      <Menu.Item
+        name='shoes'
+        active={activeTab === 'shoes'}
+        onClick={this.handleFilterClick} />
+
+      <Menu.Item
+        name='other'
+        active={activeTab === 'other'}
+        onClick={this.handleFilterClick} />
+
+      </Menu>
     )
   }
 }
 
-export default SideNav;
+export default ClothingFilter;
