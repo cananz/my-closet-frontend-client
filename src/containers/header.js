@@ -1,13 +1,12 @@
 import React from 'react';
+import { Header } from 'semantic-ui-react'
 
-const Header = props => {
+const AppHeader = props => {
 
   return (
 
-    <header>
-      { props.title }
-    </header>
+      <Header as='h1' block={true}>{ props.title }</Header>
   )
 }
 
-export default Header;
+export default AppHeader;

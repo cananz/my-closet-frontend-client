@@ -1,17 +1,49 @@
 import React from 'react';
-import ClothingCard from '../components/clothingCard'
+import { Container } from 'semantic-ui-react'
+import ClothingCardsContainer from './clothingCardsContainer'
+import SideNav from './sideNav'
+const userURL = 'http://localhost:3000/users/1'
 
-const ClothingContainer = props => {
+class ClothingContainer extends React.Component {
 
-  return (
+  constructor(props) {
+    super(props)
+    this.state = {
+      allClothes: [],
+      outfits: [],
+      filteredItems: []
+    }
+  }
 
-      <section id="content" className="grid-container">
-        {props.items.map(item => <ClothingCard key={item.id} item={item} />)}
+  componentDidMount() {
+    fetch(userURL)
+    .then(response => response.json())
+    .then(userData =>
+      this.setState({
+        allClothes: userData.items,
+        filteredItems: userData.items
+      }))
+  }
+
+  filterItems = (catName) => {
+    let filtered = this.state.allClothes.filter(item => item.category.name == catName)
+    this.setState({filteredItems: filtered})
+    // console.log(this.props.items)
+    // console.log(catName)
+  }
 
 
-      </section>
+  render() {
+    return (
+        <Container>
 
-  )
+          <SideNav />
+            <ClothingCardsContainer
+               items={this.state.filteredItems} />
+
+      </Container>
+    )
+  }
 }
 
 export default ClothingContainer;

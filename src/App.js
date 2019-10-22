@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
-import Header from './containers/header'
-import SideNav from './containers/sideNav'
+import AppHeader from './containers/header'
+import Login from './containers/login'
+// import SideNav from './containers/sideNav'
 import ClosetContainer from './containers/closetContainer'
-
+// import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -11,28 +12,42 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentUser: null,
+      currentUser: {username: 'clueless'},
       items: []
     }
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/users/1')
-    .then(r => r.json())
-    .then(userData => {
-      this.setState({items: userData.items})
-      // console.log(userData.items)
-    })
+
   }
 
+
+  // handleLoginSubmit = (e) => {
+  //   e.preventDefault()
+  //   // console.log('trying to login ' + e.target.value)
+  //   console.log()
+  // }
+
+  setCurrentUser = (userObj) => {
+    this.setState({currentUser: userObj})
+  }
 
   render() {
 
     return (
       <div id='main' className='grid-container'>
-        <Header title={'My Closet'} />
-        <SideNav />
-        <ClosetContainer items={this.state.items} />
+
+        <AppHeader title={'My Closet'} />
+
+
+        {this.state.currentUser ?
+          <ClosetContainer currentUser={this.state.currentUser} />
+          :
+          <Login
+            currentUser={this.state.currentUser}
+          setCurrentUser={this.setCurrentUser} />
+        }
+
 
       </div>
 
