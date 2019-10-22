@@ -1,9 +1,11 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react'
 // import './App.css';
 import AppHeader from './containers/header'
 import Login from './containers/login'
 // import SideNav from './containers/sideNav'
 import ClosetContainer from './containers/closetContainer'
+// import OutfitContainer from './containers/outfitsContainer'
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
@@ -13,7 +15,9 @@ class App extends React.Component {
     super()
     this.state = {
       currentUser: {username: 'clueless'},
-      items: []
+      // items: [],
+      headerActiveItem: 'closet',
+      allItems: []
     }
   }
 
@@ -32,24 +36,40 @@ class App extends React.Component {
     this.setState({currentUser: userObj})
   }
 
+  handleHeaderClick = (e, {name}) => {
+    this.setState({headerActiveItem: name})
+  }
+
+  setAllItems = (items) => {
+    this.setState({allItems: items})
+  }
+
   render() {
 
     return (
-      <div id='main' className='grid-container'>
-
-        <AppHeader title={'My Closet'} />
+<Container fluid={true} >
+        <AppHeader
+          activeItem={this.state.headerActiveItem}
+          handleHeaderClick={this.handleHeaderClick}
+          title={'My Closet'} />
 
 
         {this.state.currentUser ?
-          <ClosetContainer currentUser={this.state.currentUser} />
+
+            <ClosetContainer
+              headerActiveItem={this.state.headerActiveItem}
+              currentUser={this.state.currentUser}
+              setAllItems={this.setAllItems}
+              allItems={this.state.allItems}
+            />
+
           :
           <Login
             currentUser={this.state.currentUser}
           setCurrentUser={this.setCurrentUser} />
         }
 
-
-      </div>
+</Container>
 
 
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import ClothingCard from '../components/clothingCard'
-// import { Card, Placeholder } from 'semantic-ui-react'
 import { Card } from 'semantic-ui-react'
 
 class ClothingCardsContainer extends React.Component {
@@ -9,10 +8,19 @@ class ClothingCardsContainer extends React.Component {
 
 
   render() {
+    const {items, toggleSelection, selectedItems} = this.props
     return (
-      <Card.Group itemsPerRow={4}>
-        {this.props.items.map(item =>
-          <ClothingCard key={item.id} item={item} />
+
+
+
+      <Card.Group>
+        {items.map(item =>
+          <ClothingCard
+            key={item.id}
+            item={item}
+            toggleSelection={toggleSelection}
+            cardType="main"
+          />
         )}
       </Card.Group>
   )}

@@ -21,6 +21,7 @@ class ClothingFilter extends React.Component {
 
     return (
       <Menu tabular>
+      <Menu.Item header>My Clothes</Menu.Item>
       <Menu.Item
         name='all'
         active={activeTab === 'all'}

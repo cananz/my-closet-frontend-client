@@ -1,20 +1,42 @@
 import React from 'react'
-import { Card, Image } from 'semantic-ui-react'
+import { Card, Image, Label } from 'semantic-ui-react'
 
 class ClothingCard extends React.Component {
 
-  // constructor(props) {
-  //   super(props)
-  //
-  // }
+  constructor(props) {
+    super(props)
+    // this.state = {
+    //   selected: false
+    // }
+
+  }
+
+  selectItem = () => {
+    // this.setState({selected: !this.state.selected})
+    this.props.toggleSelection(this.props.item)
+  }
 
   render() {
-    let {item} = this.props
+    let {item, cardType} = this.props
 
     return (
         <Card>
-          <Image src={item.image} wrapped ui={false} />
-          <Card.Meta>{item.category.name}</Card.Meta>
+          {cardType === 'main' ?
+            <Label
+              icon='add circle'
+              color='pink'
+              onClick={this.selectItem}
+              content={item.category.name} />
+          :
+            <Label
+            icon='minus circle'
+            color='orange'
+            onClick={this.selectItem}/>
+          }
+
+          <Image src={item.image} />
+
+
         </Card>
     )
   }
