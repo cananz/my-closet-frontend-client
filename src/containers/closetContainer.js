@@ -4,7 +4,7 @@ import ClothingCardsContainer from './clothingCardsContainer'
 import ClothingFilter from './ClothingFilter'
 import OutfitCardsContainer from './OutfitCardsContainer'
 import NewOutfit from '../components/NewOutfit'
-const userURL = 'http://localhost:3000/users/1'
+const userURL = 'http://localhost:3000/users'
 
 class ClothingContainer extends React.Component {
 
@@ -20,14 +20,17 @@ class ClothingContainer extends React.Component {
   }
 
   componentDidMount() {
-    fetch(userURL)
+    const { id } = this.props.currentUser
+    fetch(`http://localhost:3000/users/${id}`)
     .then(response => response.json())
-    .then(userData =>
+    .then(userData => {
+      console.log(userData)
       this.setState({
         allClothes: userData.items,
         filteredItems: userData.items,
         outfits: userData.outfits
-      }))
+      })}
+    )
   }
 
   addOutfit = (e) => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Form, Card } from 'semantic-ui-react'
 
 class Login extends React.Component {
   constructor(props) {
@@ -18,31 +19,37 @@ class Login extends React.Component {
     console.log(e.target.value)
   }
 
-  handleLoginSubmit = (e) => {
-    e.preventDefault()
-    console.log(this.state.username)
-    
-    // console.log(e)
-  }
+  // handleLoginSubmit = (e) => {
+  //   e.preventDefault()
+  //   console.log(this.state.username)
+  //
+  //   // console.log(e)
+  // }
 
   render() {
     // let {currentUser} = this.state
 
 
     return (
+      <Card centered={true}>
+        <Card.Content>
+          <Card.Header>LogIn</Card.Header>
+        </Card.Content>
+        <Card.Content extra>
+          <Form onSubmit={this.props.handleLoginSubmit}>
+            <Form.Group>
 
-        <form onSubmit={this.handleLoginSubmit} >
-          <label>
-            username:
-            <input
-            type="text"
-            name="username"
-            value={this.state.username}
-            onChange={this.handleLoginChange} />
-          </label>
-          <input type="submit" value="Login" />
-        </form>
+              <Form.Input
+              placeholder="username"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleLoginChange} />
 
+              <Form.Button content="login" />
+            </Form.Group>
+          </Form>
+        </Card.Content>
+      </Card>
 
     )
   }
