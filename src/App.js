@@ -8,6 +8,7 @@ import ClosetContainer from './containers/closetContainer'
 // import OutfitContainer from './containers/outfitsContainer'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Profile from './components/Profile'
+// import NewOutfit from './components/forms/NewOutfit'
 
 
 class App extends React.Component {
@@ -22,14 +23,15 @@ class App extends React.Component {
   }
 
   // componentDidMount() {
-  //
+  //   this.handleLoginSubmit(null, 'clueless')
   // }
 
 
 
-  handleLoginSubmit = (e) => {
-    e.preventDefault()
-    console.log('trying to log in', e.target.username.value)
+  handleLoginSubmit = (e, testing) => {
+    if (e) { e.preventDefault()}
+    let username = testing ? testing : e.target.username.value
+    // console.log('trying to log in', e.target.username.value)
 
     fetch('http://localhost:3000/login', {
 
@@ -41,6 +43,7 @@ class App extends React.Component {
       },
       body: JSON.stringify({
         username: e.target.username.value
+        // username: username
       })})
       .then(r => r.json())
       .then(loginData => {

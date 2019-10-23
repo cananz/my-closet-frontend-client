@@ -24,13 +24,13 @@ class ClothingCard extends React.Component {
           {cardType === 'main' ?
             <Label
               icon='add circle'
-              color='pink'
+              color='grey'
               onClick={this.selectItem}
               content={item.category.name} />
           :
             <Label
             icon='minus circle'
-            color='orange'
+            color='pink'
             onClick={this.selectItem}/>
           }
 

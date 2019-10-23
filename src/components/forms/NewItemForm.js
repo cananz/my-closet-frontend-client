@@ -2,11 +2,11 @@ import React from 'react'
 import { Container, Form } from 'semantic-ui-react'
 
 
-const OutfitForm = props => {
+const NewItemForm = props => {
 
   return (
-
+    
   )
 }
 
-export default OutfitForm
+export default NewItemForm

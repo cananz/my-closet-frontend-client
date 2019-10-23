@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Button } from 'semantic-ui-react'
-import ClothingCard from './clothingCard'
+import ClothingCard from '../clothingCard'
 
 
 const NewOutfit = props => {

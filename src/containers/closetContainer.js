@@ -1,9 +1,10 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react'
+import { Route, Link } from 'react-router-dom'
 import ClothingCardsContainer from './clothingCardsContainer'
 import ClothingFilter from './ClothingFilter'
 import OutfitCardsContainer from './OutfitCardsContainer'
-import NewOutfit from '../components/NewOutfit'
+import NewOutfit from '../components/forms/NewOutfit'
 const userURL = 'http://localhost:3000/users'
 
 class ClothingContainer extends React.Component {
@@ -20,22 +21,25 @@ class ClothingContainer extends React.Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.currentUser
-    fetch(`http://localhost:3000/users/${id}`)
-    .then(response => response.json())
-    .then(userData => {
-      console.log(userData)
+    const { id, items, outfits } = this.props.currentUser
+    // fetch(`http://localhost:3000/users/${id}`)
+    // .then(response => response.json())
+    // .then(userData => {
+      // console.log(userData)
       this.setState({
-        allClothes: userData.items,
-        filteredItems: userData.items,
-        outfits: userData.outfits
-      })}
-    )
+        allClothes: items,
+        filteredItems: items,
+        outfits: outfits
+      })
+    // }
+    // )
   }
 
-  addOutfit = (e) => {
-    e.preventDefault()
-    this.setState({addOutfitVisible: !this.state.addOutfitVisible })
+  addOutfit = () => {
+    // e.preventDefault()
+    const {addOutfitVisible} = this.state
+    this.setState({addOutfitVisible: !addOutfitVisible })
+
   }
 
   toggleSelection = (item) => {
@@ -114,23 +118,34 @@ class ClothingContainer extends React.Component {
 
 
     return (
-      <Container fluid={true}>
+      <Container fluid textAlign='center'>
         {this.props.headerActiveItem === 'outfits' ?
-        <Container fluid={true}>
+          (this.state.addOutfitVisible ?
+            <Container fluid={true} textAlign='center'>
+              <NewOutfit
+                  selectedItems={this.state.selectedItems}
+                  toggleSelection={this.toggleSelection}
+                  submitOutfitHandler={this.submitOutfit}
+                  />
+              <ClothingCardsContainer
+                items={this.state.filteredItems}
+                selectedItems={this.state.selectedItems}
+                toggleSelection={this.toggleSelection} />
+            </Container>
 
+          :
+
+        <Container fluid={true} textAlign='center'>
           <OutfitCardsContainer
             outfits={this.state.outfits}
             addOutfit={this.addOutfit}
             outfitClickHandler={this.outfitClickHandler} />
 
-            {this.state.addOutfitVisible ?
-            () => this.displayNewOutfitCard()
-            :
-              null
-            }
-        </Container>
+        </Container>)
+
         :
-          <Container fluid={true}>
+
+          <Container fluid={true} textAlign='center'>
             <ClothingFilter
               handleFilter={this.filterItems} />
             <ClothingCardsContainer
@@ -138,17 +153,10 @@ class ClothingContainer extends React.Component {
               selectedItems={this.state.selectedItems}
               toggleSelection={this.toggleSelection} />
           </Container>
+
         }
 
-        {/* {this.state.selectedItems.length > 0 ?
-          (<NewOutfit
-          selectedItems={this.state.selectedItems}
-          toggleSelection={this.toggleSelection}
-          submitOutfitHandler={this.submitOutfit}
-          />)
-        :
-        null
-        } */}
+
 
 
       </Container>
@@ -157,3 +165,20 @@ class ClothingContainer extends React.Component {
 }
 
 export default ClothingContainer;
+
+
+
+
+
+
+
+
+// {/* {this.state.selectedItems.length > 0 ?
+//   (<NewOutfit
+//   selectedItems={this.state.selectedItems}
+//   toggleSelection={this.toggleSelection}
+//   submitOutfitHandler={this.submitOutfit}
+//   />)
+// :
+// null
+// } */}

@@ -10,10 +10,10 @@ class OutfitCardsContainer extends React.Component {
   render() {
 
     return (
-      <Card.Group itemsPerRow={6}>
+      <Card.Group centered raised itemsPerRow={2}>
         {this.props.outfits.map(outfit =>
           <OutfitCard
-            key={`outfit${outfit.id}`}
+            key={`outfit-id-${outfit.id}`}
             outfit={outfit}
             clickHandler={this.props.outfitClickHandler}
           />

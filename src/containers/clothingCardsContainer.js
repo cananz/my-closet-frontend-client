@@ -13,10 +13,10 @@ class ClothingCardsContainer extends React.Component {
 
 
 
-      <Card.Group>
+      <Card.Group centered raised stackable>
         {items.map(item =>
           <ClothingCard
-            key={item.id}
+            key={`closet-item-card-${item.id}`}
             item={item}
             toggleSelection={toggleSelection}
             cardType="main"

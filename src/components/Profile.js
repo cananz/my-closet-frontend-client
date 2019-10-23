@@ -3,13 +3,21 @@ import { Container, Card, Image } from 'semantic-ui-react'
 
 const Profile = (props) => {
   console.log('props for Profile component are: ', props)
-  let { currentUser } = props
+  let { first_name, last_name, username } = props.currentUser
   return (
-    <Card centered={true}>
+
+    <Card centered raised>
       <Card.Content>
-        <Card.Header>{`${currentUser.username}`}</Card.Header>
+        <Card.Header textAlign='center'>{`${first_name} ${last_name}`}</Card.Header>
+
+      </Card.Content>
+      <Card.Content extra>
+      <Card.Header>{username}</Card.Header>
       </Card.Content>
     </Card>
+
+
+
 
   )
 }
