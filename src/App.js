@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react'
 // import './App.css';
-import AppHeader from './containers/header'
-import Login from './containers/login'
+import AppHeader from './components/Header'
+import Login from './components/forms/login'
 // import SideNav from './containers/sideNav'
 import ClosetContainer from './containers/closetContainer'
 // import OutfitContainer from './containers/outfitsContainer'
-import { Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Profile from './components/Profile'
 
 
 class App extends React.Component {
@@ -29,6 +30,7 @@ class App extends React.Component {
   handleLoginSubmit = (e) => {
     e.preventDefault()
     console.log('trying to log in', e.target.username.value)
+
     fetch('http://localhost:3000/login', {
 
     // fetch(`http://localhost:3000/api/v1/login`, {
@@ -45,7 +47,7 @@ class App extends React.Component {
         if(loginData.error) {
           alert(loginData.error)
         } else {
-          console.log('SUCCESSFULLY LOGGED IN', loginData)
+          console.log('SUCCESSFULLY LOGGED IN', loginData.first_name)
           this.setCurrentUser(loginData)
         }
       })
@@ -55,7 +57,11 @@ class App extends React.Component {
   }
 
   setCurrentUser = (userObj) => {
-    this.setState({currentUser: userObj, headerActiveItem: 'closet'})
+    this.setState({
+      currentUser: userObj,
+      headerActiveItem: 'profile',
+      items: userObj.items
+    })
   }
 
   handleHeaderClick = (e, {name}) => {
@@ -66,29 +72,49 @@ class App extends React.Component {
 
   render() {
 
+    let loggedIn = !!this.state.currentUser
+    // let {currentUser} = this.state
+
     return (
       <Container fluid={true} >
         <AppHeader
           activeItem={this.state.headerActiveItem}
           handleHeaderClick={this.handleHeaderClick}
-          title={'My Closet'} />
+          title={'My Closet'}
+          currentUser={this.state.currentUser}
+        />
+
+        <Switch>
 
 
-          {this.state.currentUser ?
+          <Route exact path='/profile' render={() => loggedIn ? <Profile
+            currentUser={this.state.currentUser} /> : <Redirect to="/login" /> } />
 
+          <Route exact path='/closet' render={() => loggedIn ? <ClosetContainer
+            headerActiveItem={this.state.headerActiveItem}
+            currentUser={this.state.currentUser} /> : <Redirect to="/login" /> } />
+
+          <Route exact path='/outfits' render={() => loggedIn ?
             <ClosetContainer
-              headerActiveItem={this.state.headerActiveItem}
-              currentUser={this.state.currentUser}
-            />
-            :
-            <Login
-            currentUser={this.state.currentUser}
-            handleLoginSubmit={this.handleLoginSubmit} />
-          }
+            headerActiveItem={this.state.headerActiveItem}
+            currentUser={this.state.currentUser} /> : <Redirect to="/login" />
+          } />
+
+          <Route exact path="/login" render={ () => loggedIn ? <Redirect to="/profile" /> : <Login  handleLoginSubmit={this.handleLoginSubmit} /> } />
+
+          <Route exact path="/" render={ () => loggedIn ?
+            <Redirect to="/profile" /> : <Redirect to="/login" /> }
+          />
+
+
+        </Switch>
+
+      </Container>
 
 
 
-</Container>
+
+
 
 
 
@@ -100,6 +126,7 @@ class App extends React.Component {
 // <Route exact path="/" component={this.state.currentUser ? ClosetContainer : Login } />
 // <Route exact path="/login" component={Login} />
 
+{/* <Route exact path="/" render={(props) => <Redirect to="/login" />} /> */}
 
 
 
@@ -128,3 +155,23 @@ class App extends React.Component {
 
 
 export default App;
+
+
+
+
+
+
+
+
+
+// {/* {this.state.currentUser ?
+//
+//   <ClosetContainer
+//     headerActiveItem={this.state.headerActiveItem}
+//     currentUser={this.state.currentUser}
+//   />
+//   :
+//   <Login
+//   currentUser={this.state.currentUser}
+//   handleLoginSubmit={this.handleLoginSubmit} />
+// } */}
