@@ -80,15 +80,22 @@ class ClothingContainer extends React.Component {
       })
     }
     // debugger
-    fetch(userURL + '/outfits', configObj)
+    fetch(`${userURL}/${this.props.currentUser.id}/outfits`, configObj)
     .then(response => response.json())
     .then(newOutfit => {
-        console.log(newOutfit)
+        // console.log(newOutfit)
         let {outfits} = this.state
 
-      this.setState({outfits: [...outfits, newOutfit] })
+      this.setState({
+        selectedItems: [],
+        outfits: [...outfits, newOutfit],
+        addOutfitVisible: false
+      })
+
     }
     )
+
+
   }
 
   outfitClickHandler = (outfitObj) => {
