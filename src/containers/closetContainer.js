@@ -61,14 +61,8 @@ class ClothingContainer extends React.Component {
   }
 
   submitOutfit = () => {
-
     let itemIDs = this.state.selectedItems.map(item => item.id)
 
-    // const itemObjArr = itemIDs.map(item => {
-    //   // user_id: this.props.currentUser.id,
-    //   item_id: item
-    // })
-    // console.log(itemIDs)
     let configObj = {
       method: 'POST',
       headers: {
@@ -87,11 +81,10 @@ class ClothingContainer extends React.Component {
         let {outfits} = this.state
 
       this.setState({
-        selectedItems: [],
         outfits: [...outfits, newOutfit],
-        addOutfitVisible: false
+        addOutfitVisible: false,
+        selectedItems: []
       })
-
     }
     )
 
@@ -100,6 +93,7 @@ class ClothingContainer extends React.Component {
 
   outfitClickHandler = (outfitObj) => {
     console.log(outfitObj)
+
   }
 
   filterItems = (catName) => {
