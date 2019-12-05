@@ -1,10 +1,12 @@
 import React from 'react'
-import { Card, Image, Label, Grid } from 'semantic-ui-react'
+import { Card, Image, Label, Grid, Icon } from 'semantic-ui-react'
 
 const OutfitCard = props => {
   const {items} = props.outfit
   return (
-    <Card onClick={() => props.clickHandler(props.outfit)}>
+    <Card>
+
+      {/* <Card onClick={() => props.clickHandler(props.outfit)}> */}
 
       <Card.Content>
         <Image.Group size='tiny'>
@@ -22,12 +24,16 @@ const OutfitCard = props => {
 
 
 
-
+      
 
       <Card.Content extra>
 
         <Label tag={true} content={`${items.length} pieces`} />
-        
+        {/* <Label color="red" content="X" floated="right" /> */}
+        <Label as="a" onClick={() => props.deleteOutfit(props.outfit.id)}>
+          <Icon color="orange" name="trash" />
+          Delete
+        </Label>
 
       </Card.Content>
 

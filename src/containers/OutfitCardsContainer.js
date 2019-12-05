@@ -16,6 +16,7 @@ class OutfitCardsContainer extends React.Component {
             key={`outfit-id-${outfit.id}`}
             outfit={outfit}
             clickHandler={this.props.outfitClickHandler}
+            deleteOutfit={this.props.deleteOutfit}
           />
         )}
 

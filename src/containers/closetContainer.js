@@ -22,17 +22,13 @@ class ClothingContainer extends React.Component {
 
   componentDidMount() {
     const { id, items, outfits } = this.props.currentUser
-    // fetch(`http://localhost:3000/users/${id}`)
-    // .then(response => response.json())
-    // .then(userData => {
-      // console.log(userData)
+
       this.setState({
         allClothes: items,
         filteredItems: items,
         outfits: outfits
       })
-    // }
-    // )
+
   }
 
   addOutfit = () => {
@@ -43,7 +39,6 @@ class ClothingContainer extends React.Component {
   }
 
   toggleSelection = (item) => {
-    console.log(item)
     // const {selectedItems} = this.state
     if (!this.state.selectedItems.find(x => x.id === item.id)) {
       this.setState({selectedItems: [...this.state.selectedItems, item]})
@@ -51,12 +46,6 @@ class ClothingContainer extends React.Component {
       let removed = this.state.selectedItems.filter(x => x.id !== item.id)
       this.setState({selectedItems: removed})
     }
-
-
-
-    // const check = this.state.selectedItems.includes(item) ?
-    //   () => this.state.selectedItems
-    // :
 
   }
 
@@ -73,11 +62,10 @@ class ClothingContainer extends React.Component {
         items: itemIDs
       })
     }
-    // debugger
+
     fetch(`${userURL}/${this.props.currentUser.id}/outfits`, configObj)
     .then(response => response.json())
     .then(newOutfit => {
-        // console.log(newOutfit)
         let {outfits} = this.state
 
       this.setState({
@@ -85,10 +73,26 @@ class ClothingContainer extends React.Component {
         addOutfitVisible: false,
         selectedItems: []
       })
+    })
+  }
+
+  deleteOutfit = (outfitId) => {
+    console.log('deleting  ', outfitId)
+
+    let configObj = {
+      method: 'DELETE',
+      headers:  {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json'
+      }
     }
-    )
 
+    fetch(`${userURL}/${this.props.currentUser.id}/outfits/${outfitId}`, configObj)
+    .then(response => response.json())
+    .then(returnObj => {
 
+      this.setState({outfits: returnObj})
+    })
   }
 
   outfitClickHandler = (outfitObj) => {
@@ -111,12 +115,7 @@ class ClothingContainer extends React.Component {
       submitOutfitHandler={this.submitOutfit}
       />
 
-
-
   render() {
-
-
-
 
     return (
       <Container fluid textAlign='center'>
@@ -133,32 +132,25 @@ class ClothingContainer extends React.Component {
                 selectedItems={this.state.selectedItems}
                 toggleSelection={this.toggleSelection} />
             </Container>
-
           :
-
-        <Container fluid={true} textAlign='center'>
-          <OutfitCardsContainer
-            outfits={this.state.outfits}
-            addOutfit={this.addOutfit}
-            outfitClickHandler={this.outfitClickHandler} />
-
-        </Container>)
-
+            <Container fluid={true} textAlign='center'>
+              <OutfitCardsContainer
+                outfits={this.state.outfits}
+                addOutfit={this.addOutfit}
+                outfitClickHandler={this.outfitClickHandler}
+                deleteOutfit={this.deleteOutfit} />
+            </Container>)
         :
-
-          <Container fluid={true} textAlign='center'>
-            <ClothingFilter
-              handleFilter={this.filterItems} />
-            <ClothingCardsContainer
-              items={this.state.filteredItems}
-              selectedItems={this.state.selectedItems}
-              toggleSelection={this.toggleSelection} />
-          </Container>
+            <Container fluid={true} textAlign='center'>
+              <ClothingFilter
+                handleFilter={this.filterItems} />
+              <ClothingCardsContainer
+                items={this.state.filteredItems}
+                selectedItems={this.state.selectedItems}
+                toggleSelection={this.toggleSelection} />
+            </Container>
 
         }
-
-
-
 
       </Container>
     )
@@ -166,20 +158,3 @@ class ClothingContainer extends React.Component {
 }
 
 export default ClothingContainer;
-
-
-
-
-
-
-
-
-// {/* {this.state.selectedItems.length > 0 ?
-//   (<NewOutfit
-//   selectedItems={this.state.selectedItems}
-//   toggleSelection={this.toggleSelection}
-//   submitOutfitHandler={this.submitOutfit}
-//   />)
-// :
-// null
-// } */}
