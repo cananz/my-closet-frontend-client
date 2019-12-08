@@ -13,7 +13,7 @@ class ClothingCardsContainer extends React.Component {
 
 
 
-      <Card.Group centered raised stackable>
+      <Card.Group centered stackable>
         {items.map(item =>
           <ClothingCard
             key={`closet-item-card-${item.id}`}
@@ -42,13 +42,13 @@ export default ClothingCardsContainer
 
 
 
-{/* <Card.Group itemsPerRow={4}>
-  <Card
-    raised={true}>
-    <Card.Content>
-      <Placeholder>
-        <Placeholder.Image square />
-      </Placeholder>
-    </Card.Content>
-  </Card>
-</Card.Group> */}
+// {/* <Card.Group itemsPerRow={4}>
+//   <Card
+//     raised={true}>
+//     <Card.Content>
+//       <Placeholder>
+//         <Placeholder.Image square />
+//       </Placeholder>
+//     </Card.Content>
+//   </Card>
+// </Card.Group> */}

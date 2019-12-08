@@ -6,7 +6,7 @@ const Profile = (props) => {
   let { first_name, last_name, username } = props.currentUser
   return (
 
-    <Card centered raised>
+    <Card centered>
       <Card.Content>
         <Card.Header textAlign='center'>{`${first_name} ${last_name}`}</Card.Header>
 
