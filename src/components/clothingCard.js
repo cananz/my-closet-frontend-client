@@ -5,33 +5,29 @@ class ClothingCard extends React.Component {
 
   constructor(props) {
     super(props)
-    // this.state = {
-    //   selected: false
-    // }
-
   }
 
   selectItem = () => {
-    // this.setState({selected: !this.state.selected})
     this.props.toggleSelection(this.props.item)
   }
+
 
   render() {
     let {item, cardType} = this.props
 
     return (
-        <Card>
+        <Card onClick={this.selectItem}>
           {cardType === 'main' ?
             <Label
               icon='add circle'
               color='grey'
-              onClick={this.selectItem}
-              content={item.category.name} />
+              content={item.category.name}
+            />
           :
-            <Label
+          <Label
             icon='minus circle'
             color='pink'
-            onClick={this.selectItem}/>
+          />
           }
 
           <Image src={item.image} />
@@ -44,13 +40,3 @@ class ClothingCard extends React.Component {
 }
 
 export default ClothingCard
-
-
-
-
-{/* <div className="grid-card clothing-item">
-
-  <img className="card-image"
-    src={item.image} />
-
-  </div> */}
