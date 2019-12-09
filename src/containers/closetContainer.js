@@ -6,6 +6,8 @@ import ClothingFilter from './ClothingFilter'
 import OutfitCardsContainer from './OutfitCardsContainer'
 import NewOutfit from '../components/forms/NewOutfit'
 const userURL = 'http://localhost:3000/users'
+const outfitURL = 'http://localhost:3000/outfits'
+
 
 class ClothingContainer extends React.Component {
 
@@ -59,17 +61,19 @@ class ClothingContainer extends React.Component {
         'Accepts': 'application/json'
       },
       body: JSON.stringify({
-        items: itemIDs
+        items: itemIDs,
+        user_id: this.props.currentUser.id
       })
     }
 
-    fetch(`${userURL}/${this.props.currentUser.id}/outfits`, configObj)
+    // fetch(`${userURL}/${this.props.currentUser.id}/outfits`, configObj)
+    fetch(`${outfitURL}`, configObj)
     .then(response => response.json())
-    .then(newOutfit => {
+    .then(newOutfits => {
         let {outfits} = this.state
-
+        debugger
       this.setState({
-        outfits: [...outfits, newOutfit],
+        outfits: newOutfits,
         addOutfitVisible: false,
         selectedItems: []
       })
@@ -87,7 +91,8 @@ class ClothingContainer extends React.Component {
       }
     }
 
-    fetch(`${userURL}/${this.props.currentUser.id}/outfits/${outfitId}`, configObj)
+    // fetch(`${userURL}/${this.props.currentUser.id}/outfits/${outfitId}`, configObj)
+    fetch(`${outfitURL}/${outfitId}`, configObj)
     .then(response => response.json())
     .then(returnObj => {
 
