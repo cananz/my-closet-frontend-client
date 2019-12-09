@@ -3,9 +3,9 @@ import { Card, Image, Label } from 'semantic-ui-react'
 
 class ClothingCard extends React.Component {
 
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   selectItem = () => {
     this.props.toggleSelection(this.props.item)
@@ -13,20 +13,18 @@ class ClothingCard extends React.Component {
 
 
   render() {
-    let {item, cardType} = this.props
+    let {item, cardType, cardStyle} = this.props
 
     return (
         <Card onClick={this.selectItem}>
           {cardType === 'main' ?
-            <Label
-              icon='add circle'
-              color='grey'
-              content={item.category.name}
-            />
+            null
           :
           <Label
             icon='minus circle'
-            color='pink'
+            color='orange'
+            floating
+
           />
           }
 

@@ -118,36 +118,41 @@ class ClothingContainer extends React.Component {
     return (
       <Container fluid textAlign='center'>
         {this.props.headerActiveItem === 'outfits' ?
+
           (this.state.addOutfitVisible ?
-            <Container fluid={true} textAlign='center'>
+            <Container fluid={true} textAlign='center' className="outfit-form">
               <NewOutfit
-                  selectedItems={this.state.selectedItems}
-                  toggleSelection={this.toggleSelection}
-                  submitOutfitHandler={this.submitOutfit}
-                  addOutfitToggle={this.addOutfit}
-                  />
+                selectedItems={this.state.selectedItems}
+                toggleSelection={this.toggleSelection}
+                submitOutfitHandler={this.submitOutfit}
+                addOutfitToggle={this.addOutfit}
+              />
               <ClothingCardsContainer
                 items={this.state.filteredItems}
                 selectedItems={this.state.selectedItems}
-                toggleSelection={this.toggleSelection} />
+                toggleSelection={this.toggleSelection}
+                closet={false}
+              />
             </Container>
           :
-            <Container fluid={true} textAlign='center'>
-              <OutfitCardsContainer
-                outfits={this.state.outfits}
-                addOutfit={this.addOutfit}
-                outfitClickHandler={this.outfitClickHandler}
-                deleteOutfit={this.deleteOutfit} />
-            </Container>)
+          <Container fluid={true} textAlign='center' className="outfits">
+            <OutfitCardsContainer
+              outfits={this.state.outfits}
+              addOutfit={this.addOutfit}
+              outfitClickHandler={this.outfitClickHandler}
+              deleteOutfit={this.deleteOutfit}
+            />
+          </Container>)
         :
-            <Container fluid={true} textAlign='center'>
-              <ClothingFilter
-                handleFilter={this.filterItems} />
-              <ClothingCardsContainer
-                items={this.state.filteredItems}
-                selectedItems={this.state.selectedItems}
-                toggleSelection={this.toggleSelection} />
-            </Container>
+        <Container fluid={true} textAlign='center' className="closet-items">
+          <ClothingFilter handleFilter={this.filterItems} />
+          <ClothingCardsContainer
+            items={this.state.filteredItems}
+            selectedItems={this.state.selectedItems}
+            toggleSelection={this.toggleSelection}
+            closet={true}
+          />
+        </Container>
 
         }
 
