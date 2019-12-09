@@ -1,15 +1,24 @@
 import React from 'react'
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Container, Segment } from 'semantic-ui-react'
 import ClothingCard from '../clothingCard'
 
 
 const NewOutfit = props => {
 
   return (
-    <Card fluid color='orange'>
-      <Card.Content>
-        <Card.Header>New Outfit</Card.Header>
-        <Card.Meta>Select Items to Add To Outfit</Card.Meta>
+    <Segment inverted color="orange">
+      <Card fluid>
+        <Card.Content>
+          <Button
+            floated="left"
+            circular
+            icon="x"
+            onClick={props.addOutfitToggle}
+          />
+
+          <Card.Header>New Outfit</Card.Header>
+
+
           <Card.Group itemsPerRow={8}>
             {props.selectedItems.map(item =>
               <ClothingCard
@@ -20,14 +29,24 @@ const NewOutfit = props => {
               />
             )}
           </Card.Group>
-          <Card.Content extra>
-          <Button
-            onClick={props.submitOutfitHandler}
-            floated='right'>Complete Outfit!</Button>
-        </Card.Content>
-      </Card.Content>
 
-    </Card>
+        </Card.Content>
+        <Card.Content>
+          {props.selectedItems.length > 0 ?
+            <Button
+              onClick={props.submitOutfitHandler}
+              content="Add Outfit"
+            />
+          :
+          <Card.Meta content="Select Items to Add To Outfit" />
+
+          }
+
+
+        </Card.Content>
+
+      </Card>
+    </Segment>
   )
 
 }

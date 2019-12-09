@@ -36,8 +36,10 @@ class ClothingContainer extends React.Component {
   addOutfit = () => {
     // e.preventDefault()
     const {addOutfitVisible} = this.state
-    this.setState({addOutfitVisible: !addOutfitVisible })
-
+    this.setState({
+      addOutfitVisible: !addOutfitVisible,
+      selectedItems: []
+     })
   }
 
   toggleSelection = (item) => {
@@ -117,6 +119,7 @@ class ClothingContainer extends React.Component {
       selectedItems={this.state.selectedItems}
       toggleSelection={this.toggleSelection}
       submitOutfitHandler={this.submitOutfit}
+      addOutfitToggle={this.addOutfit}
       />
 
   render() {
@@ -130,6 +133,7 @@ class ClothingContainer extends React.Component {
                   selectedItems={this.state.selectedItems}
                   toggleSelection={this.toggleSelection}
                   submitOutfitHandler={this.submitOutfit}
+                  addOutfitToggle={this.addOutfit}
                   />
               <ClothingCardsContainer
                 items={this.state.filteredItems}
