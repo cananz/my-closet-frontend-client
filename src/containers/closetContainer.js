@@ -70,8 +70,7 @@ class ClothingContainer extends React.Component {
     fetch(`${outfitURL}`, configObj)
     .then(response => response.json())
     .then(newOutfits => {
-        let {outfits} = this.state
-        debugger
+
       this.setState({
         outfits: newOutfits,
         addOutfitVisible: false,
