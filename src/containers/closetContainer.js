@@ -24,13 +24,11 @@ class ClothingContainer extends React.Component {
 
   componentDidMount() {
     const { id, items, outfits } = this.props.currentUser
-
       this.setState({
         allClothes: items,
         filteredItems: items,
         outfits: outfits
       })
-
   }
 
   addOutfit = () => {
@@ -43,14 +41,12 @@ class ClothingContainer extends React.Component {
   }
 
   toggleSelection = (item) => {
-    // const {selectedItems} = this.state
     if (!this.state.selectedItems.find(x => x.id === item.id)) {
       this.setState({selectedItems: [...this.state.selectedItems, item]})
     } else {
       let removed = this.state.selectedItems.filter(x => x.id !== item.id)
       this.setState({selectedItems: removed})
     }
-
   }
 
   submitOutfit = () => {
@@ -68,7 +64,6 @@ class ClothingContainer extends React.Component {
       })
     }
 
-    // fetch(`${userURL}/${this.props.currentUser.id}/outfits`, configObj)
     fetch(`${outfitURL}`, configObj)
     .then(response => response.json())
     .then(newOutfits => {
@@ -82,8 +77,6 @@ class ClothingContainer extends React.Component {
   }
 
   deleteOutfit = (outfitId) => {
-    console.log('deleting  ', outfitId)
-
     let configObj = {
       method: 'DELETE',
       headers:  {
@@ -92,7 +85,6 @@ class ClothingContainer extends React.Component {
       }
     }
 
-    // fetch(`${userURL}/${this.props.currentUser.id}/outfits/${outfitId}`, configObj)
     fetch(`${outfitURL}/${outfitId}`, configObj)
     .then(response => response.json())
     .then(returnObj => {
@@ -103,7 +95,6 @@ class ClothingContainer extends React.Component {
 
   outfitClickHandler = (outfitObj) => {
     console.log(outfitObj)
-
   }
 
   filterItems = (catName) => {
